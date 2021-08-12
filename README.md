@@ -14,7 +14,7 @@ The repo includes impressive visualizations of the Vision Transformer (ViT) atte
 
 Our work primarily focuses on applying pretrained Vision Transfomers to Surfline Webcams. The primary goal of our project was to be able to count the number of surfers present in the webcams' frame without labels. To achieve this we passed frames of the videos through the ViT and created a heatmap image from the attention mask output. This heatmap image was then passed through a blob detector to predict the number of surfers. Below is an example heatmap output from a preliminary test with a short cropped video.
 
-![Insert test gif here]()
+![Short cropped example](dino/data/ex_crop_heat.gif)
 
 # Data
 
@@ -32,14 +32,39 @@ Here is an example of what an uncropped image looked like:
 
 And here is an example frame from after preprocessing:
 
-![Example cropped frame (doesn't work because of space in filename)](dino/data/images/2021-08-11-10:44:00-07:00.png)
+![Example cropped frame (doesn't work because of space in filename)](dino/data/images/2021-08-11_10:44:00-07:00.png)
 
 # Pipeline
 
 Our pipeline from Raw mp4 video to image counts is as follows:
 
-1. Read mp4 videos and split by frame. Grab 1 frame per minute.
-2. Pass frame through ViT model, return attention output
-3. Isolate attention from `CLS` token and sum heads' attention together.
-4. Run blob detection on each image and log result.
-5. Loop through for each image in set.
+## 1. Extract
+Extract frame images in 1 minute increments and crop to simplify
+## 2. Attend
+Create heatmap image from output attention map of ViT
+## 3. Blob
+Pass masked image through Skimage blob detection
+
+
+# Results
+
+![panel](/dino/data/panel.gif)
+
+We show a short clip of analysis from dawn for a few hours.  This clip shows the original image that was analyzed with the attention heatmap extracted from the ViT `CLS` token across all heads, and the resulting blob detections.  There are a few problems with the model when there is no object, because the attention is doing its best to find an object, so some blobs will be randomly detected if there are not objects in the scene.
+
+## Trouble Points
+
+* Finding which attention head to use.
+* Which blob detection method to use (3 available through skimage).
+    * Tweaking of hyperparameters to focus on surfers.
+* For eval, difficult to manually annotate a set for comparison.
+* When no surfers present, attention is focused on other objects such as a powerline in front of the webcam.
+
+![trouble](dino/data/trouble.png)
+
+## Further Work
+
+* Finetune DINO ViT on our data
+* Manually label a training set of videos with number of surfers
+* Train a separate model for predicting the number of surfers taking attention mask as input
+
