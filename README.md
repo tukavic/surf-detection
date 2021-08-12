@@ -16,7 +16,7 @@ Our work primarily focuses on applying pretrained Vision Transfomers to Surfline
 
 # Data
 
-We built a script to automatically pull rewind data from the webcam.  That code is [here](https://gist.github.com/tukavic/da2238ed28eeb00b97d9acecf29c2076). Premium membership is required to use.
+We built a script to automatically pull rewind data from the webcam.  That code is [here](https://gist.github.com/tukavic/da2238ed28eeb00b97d9acecf29c2076). Premium membership is required for access.
 
 
 # Pipeline
