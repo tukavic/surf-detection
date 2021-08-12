@@ -52,6 +52,10 @@ Pass masked image through Skimage blob detection
 
 We show a short clip of analysis from dawn for a few hours.  This clip shows the original image that was analyzed with the attention heatmap extracted from the ViT `CLS` token across all heads, and the resulting blob detections.  There are a few problems with the model when there is no object, because the attention is doing its best to find an object, so some blobs will be randomly detected if there are not objects in the scene.
 
+We also predict the minute by minute count of surfers.
+
+![dist](dino/data/dist.png)
+
 ## Trouble Points
 
 * Finding which attention head to use.
