@@ -843,7 +843,7 @@ GRAPH_PLACEHOLDER = dcc.Graph(
             "autosize": True,
             "paper_bgcolor": "#272a31",
             "plot_bgcolor": "#272a31",
-            "margin": go.Margin(l=40, b=40, t=26, r=10),
+            "margin": go.layout.Margin(l=40, b=40, t=26, r=10),
             "xaxis": {
                 "range": (0, 1527),
                 "scaleanchor": "y",
@@ -1006,7 +1006,7 @@ def show_histogram(image):
     layout = go.Layout(
         autosize=True,
         title=title,
-        margin=go.Margin(l=50, r=30),
+        margin=go.layout.Margin(l=50, r=30),
         legend=dict(x=0, y=1.15, orientation="h"),
         paper_bgcolor="#31343a",
         plot_bgcolor="#272a31",
